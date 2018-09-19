@@ -1,319 +1,405 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-    <title>中科软评信息安全实验室</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>中科软评</title>
+    <meta name="author" content="Alvaro Trigo Lopez" />
+    <meta name="description" content="fullPage fixed full-screen backgrounds." />
+    <meta name="keywords" content="fullpage,jquery,demo,screen,fixed,fullscreen,backgrounds,full-screen" />
+    <meta name="Resource-type" content="Document" />
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
-<style>
-.jumbotron{
-	background:url("http://ww1.sinaimg.cn/large/87c01ec7gy1fplacfacbcj21hc0tzgrk.jpg");
 
+
+    <style>
+
+
+
+        /*!
+ * fullPage 3.0.2
+ * https://github.com/alvarotrigo/fullPage.js
+ *
+ * @license GPLv3 for open source use only
+ * or Fullpage Commercial License for commercial use
+ * http://alvarotrigo.com/fullPage/pricing/
+ *
+ * Copyright (C) 2018 http://alvarotrigo.com/fullPage - A project by Alvaro Trigo
+ */
+ html.fp-enabled,
+.fp-enabled body {
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
+
+    /*Avoid flicker on slides transitions for mobile phones #336 */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-body {
-  padding-top: 3rem;
+.fp-section {
+    position: relative;
+    -webkit-box-sizing: border-box; /* Safari<=5 Android<=3 */
+    -moz-box-sizing: border-box; /* <=28 */
+    box-sizing: border-box;
 }
-footer{
-    width:100%;
-    text-align:center;
+.fp-slide {
+    float: left;
 }
-section {
-padding-top: 4rem;
+.fp-slide, .fp-slidesContainer {
+    height: 100%;
+    display: block;
 }
-</style>	
-	
-	
-  </head>
+.fp-slides {
+    z-index:1;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    -webkit-transition: all 0.3s ease-out; /* Safari<=6 Android<=4.3 */
+    transition: all 0.3s ease-out;
+}
+.fp-section.fp-table, .fp-slide.fp-table {
+    display: table;
+    table-layout:fixed;
+    width: 100%;
+}
+.fp-tableCell {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+}
+.fp-slidesContainer {
+    float: left;
+    position: relative;
+}
+.fp-controlArrow {
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    margin-top: -38px;
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+.fp-controlArrow.fp-prev {
+    left: 15px;
+    width: 0;
+    border-width: 38.5px 34px 38.5px 0;
+    border-color: transparent #fff transparent transparent;
+}
+.fp-controlArrow.fp-next {
+    right: 15px;
+    border-width: 38.5px 0 38.5px 34px;
+    border-color: transparent transparent transparent #fff;
+}
+.fp-scrollable {
+    overflow: hidden;
+    position: relative;
+}
+.fp-scroller{
+    overflow: hidden;
+}
+.iScrollIndicator{
+    border: 0 !important;
+}
+.fp-notransition {
+    -webkit-transition: none !important;
+    transition: none !important;
+}
+#fp-nav {
+    position: fixed;
+    z-index: 100;
+    margin-top: -32px;
+    top: 50%;
+    opacity: 1;
+    -webkit-transform: translate3d(0,0,0);
+}
+#fp-nav.fp-right {
+    right: 17px;
+}
+#fp-nav.fp-left {
+    left: 17px;
+}
+.fp-slidesNav{
+    position: absolute;
+    z-index: 4;
+    opacity: 1;
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    left: 0 !important;
+    right: 0;
+    margin: 0 auto !important;
+}
+.fp-slidesNav.fp-bottom {
+    bottom: 17px;
+}
+.fp-slidesNav.fp-top {
+    top: 17px;
+}
+#fp-nav ul,
+.fp-slidesNav ul {
+  margin: 0;
+  padding: 0;
+}
+#fp-nav ul li,
+.fp-slidesNav ul li {
+    display: block;
+    width: 14px;
+    height: 13px;
+    margin: 7px;
+    position:relative;
+}
+.fp-slidesNav ul li {
+    display: inline-block;
+}
+#fp-nav ul li a,
+.fp-slidesNav ul li a {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text-decoration: none;
+}
+#fp-nav ul li a.active span,
+.fp-slidesNav ul li a.active span,
+#fp-nav ul li:hover a.active span,
+.fp-slidesNav ul li:hover a.active span{
+    height: 12px;
+    width: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 100%;
+ }
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    height: 4px;
+    width: 4px;
+    border: 0;
+    background: #333;
+    left: 50%;
+    top: 50%;
+    margin: -2px 0 0 -2px;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+#fp-nav ul li:hover a span,
+.fp-slidesNav ul li:hover a span{
+    width: 10px;
+    height: 10px;
+    margin: -5px 0px 0px -5px;
+}
+#fp-nav ul li .fp-tooltip {
+    position: absolute;
+    top: -2px;
+    color: #fff;
+    font-size: 14px;
+    font-family: arial, helvetica, sans-serif;
+    white-space: nowrap;
+    max-width: 220px;
+    overflow: hidden;
+    display: block;
+    opacity: 0;
+    width: 0;
+    cursor: pointer;
+}
+#fp-nav ul li:hover .fp-tooltip,
+#fp-nav.fp-show-active a.active + .fp-tooltip {
+    -webkit-transition: opacity 0.2s ease-in;
+    transition: opacity 0.2s ease-in;
+    width: auto;
+    opacity: 1;
+}
+#fp-nav ul li .fp-tooltip.fp-right {
+    right: 20px;
+}
+#fp-nav ul li .fp-tooltip.fp-left {
+    left: 20px;
+}
+.fp-auto-height.fp-section,
+.fp-auto-height .fp-slide,
+.fp-auto-height .fp-tableCell{
+    height: auto !important;
+}
 
-  <body>
+.fp-responsive .fp-auto-height-responsive.fp-section,
+.fp-responsive .fp-auto-height-responsive .fp-slide,
+.fp-responsive .fp-auto-height-responsive .fp-tableCell {
+    height: auto !important;
+}
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">中科软评</a>
-      <!--<img src="a.png" class="img-fluid" style="height: 25px;  display: block;"></img>-->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
-     
-    </nav>
+</style>
+    <style>
 
-    <main role="main">
 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <div class="container">
-          <h1 class="text-center" style="color:white;">全业务流程安全服务 </h1></br>
-          <p class="text-center" style="color:white;">四大类共15项深度检测项目，涵盖互联网企业产品线全部生命周期</p>
-          <p class="text-center" style="color:white;">线上检测全面采用后付费方式 按效果付费</p>
+        /* Style for our header texts
+	* --------------------------------------- */
+	h1{
+		font-size: 7em;
+		font-family: arial,helvetica;
+		color: #fff;
+		margin:0;
+		padding:0;
+	}
+
+	/* Centered texts in each section
+	* --------------------------------------- */
+	.section{
+		text-align:center;
+	}
+
+
+	/* Backgrounds will cover all the section
+	* --------------------------------------- */
+	#section0,
+	#section1,
+	#section2,
+	#section3,
+    #slide1,
+    #slide2{
+		background-size: cover;
+		background-attachment: fixed;
+	}
+
+	/* Defining each sectino background and styles
+	* --------------------------------------- */
+	#section0{
+		background-image: url("http://wx1.sinaimg.cn/large/0060lm7Tly1fver24zftij314a0p0jxr.jpg");
+       /* http://wx3.sinaimg.cn/large/0060lm7Tly1fv9cxgcjhoj31kw12rb29.jpg*/
+	}
+	#section0 h1{
+		top: 50%;
+		transform: translateY(-50%);
+		position: relative;
+	}
+	#section2{
+		background-image: url("http://wx1.sinaimg.cn/large/0060lm7Tly1fv9deb8ktvj30q40hfju7.jpeg");
+		padding: 6% 0 0 0;
+	}
+	#section3{
+        background-image: url("https://www.babaimage.com/images/technology-backgrounds-blue-technology-white-ppt-backgrounds.jpg");
+		padding: 6% 0 0 0;
+	}
+    #section1{
+        background-image: url("http://wx4.sinaimg.cn/large/0060lm7Tly1fv9df05bzij30xc0m9k4c.jpeg");
+		padding: 6% 0 0 0;
+	}
+	#section3 h1{
+		color: #000;
+	}
+	#header, #footer{
+		position:fixed;
+		
+		display:block;
+		width: 100%; 
+		background: #333;
+		z-index:9;
+		text-align:left;
+		color: #f2f2f2;
+		padding: 10px 10px 10px 10px;
+	}
+
+	#header{
+		top:0px;
+	}
+	#footer{
+		bottom:0px;
+	}
+
+
+
+
+	/* Bottom menu
+	* --------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+	</style>
+    <!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+</head>
+
+<body>
+
+    <div id="header">中 科 软 评</div>
+    <div id="footer" style="text-align:center">zk@zkruanping.com 2018</div>
+
+    <div id="fullpage">
+        <div class="section " id="section0">
+            <h1 class="display-1" style="text-shadow: 9px 9px 9px rgb(0, 0, 0);">中 科 软 评<br><br>信息安全监测与评测中心建设专家</h1>
+            <h1><a href="cvescan.html">线上漏洞检测服务</a></h1>
         </div>
-      </div>
-
-      <div class="container">
-
-   
-       <!-- <div class="row">
-          <div class="col-md-12">
-            <h4 >安全播报</h4>
-<ul>
-    <li>2018年4月9日<strong>360安全路由2</strong>(版本号:V2.0.10.55897)发现CVE-2016-2**8等16个CVSS评分超过7.0的高危漏洞</li>
-    <li>2018年4月8日<strong>小米路由3A</strong>(版本号:2.12.8)发现CVE-2016-6**1等7个CVSS评分超过7.0的高危漏洞</li>
-    <li>2018年4月7日<strong>华为Mate10 Pro</strong>(版本号:8.0.0.128)发现CVE-2017-8**7等32个CVSS评分超过7.0的高危漏洞</li>
-    <li>2018年4月6日<strong>OPPO R11</strong>(版本号:20171101)发现CVE-2016-6**1等327个CVSS评分超过7.0的高危漏洞, 存在GPL版权纠纷风险</li>
-    <li>2018年4月5日<strong>小米手机MIX2</strong>(版本号:MIUI9.2.7)发现CVE-2017-1***4等233个CVSS评分超过7.0的高危漏洞, 存在GPL版权纠纷风险</li>
-    <li>2018年4月4日<strong>交通银行信用卡 买单吧IOS客户端</strong>(版本号:2.6.1)发现CVE-2017-7**2等27个CVSS评分超过7.0的高危漏洞, 存在GPL版权纠纷风险</li>
-    <li>2018年4月3日<strong>农行掌上银行IOS客户端</strong>(版本号:3.7.4)发现CVE-2017-1***9等4个CVSS评分超过7.0的高危漏洞</li>
-    <li>2018年4月2日<strong>建设银行IOS客户端</strong>(版本号:4.0.91)发现CVE-2008-1**6等1个CVSS评分超过7.0的高危漏洞</li>
-    <li>2018年3月30日<strong>工商银行IOS客户端 </strong>(版本号:1.2.37)发现CVE-2017-8**7等9个CVSS评分超过7.0的高危漏洞, 存在GPL版权纠纷风险</li>
-</ul>
-
-          </div> 
-          </div>
-          <hr>
-        -->
-
-
-          <h4 class="text-center">检测项目</h4>
-          <div class="row">
-              
-            <div class="col-md-2">            
-                <a href="#intro"  class="btn btn-success btn-sm btn-block">移动安全</a>
-               <p>苹果IOS与安卓APP深入分析, 精准定位安全隐患，后门与漏洞。</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#intro"   class="btn btn-primary btn-sm btn-block">渗透测试</a>
-                <p>白帽子安全专家在取得用户授权后模拟黑客进行攻击检测网站或应用接口的安全漏洞</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#intro"   class="btn btn-info btn-sm btn-block">APP兼容性</a>
-                <p>全自动真机兼容性测试,涵盖上百种热门真机</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#intro"   class="btn btn-danger btn-sm btn-block">模糊测试</a>
-                <p>不依赖任何已公开或未公开的漏洞库进行未知漏洞深入挖掘,支持200多种通信协议</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#intro"   class="btn btn-warning btn-sm btn-block">静态分析</a>
-                <p>精准识别20多种语言中的代码质量和安全问题，速度快，精度高，误报率低. 采用国际标准检测规则。支持GJB编码规范。</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#intro"  class="btn btn-success btn-sm btn-block">单元测试</a>
-                <p>嵌入式开发专用自动化单元测试，自动生成代码覆盖度检测报告，支持几乎所有常用嵌入式编译器</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#intro"   class="btn btn-primary btn-sm btn-block">组成分析</a>
-                <p>拥有超过180亿行开源项目代码指纹信息库，可准确定位组成部分的来源和安全，许可等信息</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#intro"   class="btn btn-info btn-sm btn-block">漏洞识别</a>
-                <p>专利技术基于漏洞指纹库，可精准快速定位源代码或编译后文件的CVE漏洞信息</p>
-            </div>
-
-            <div class="col-md-2">
-                <a href="#intro"   class="btn btn-danger btn-sm btn-block">设备安全</a>
-                <p>对工控，汽车，物联网等智能设备的通信接口进行深度漏洞挖掘</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#intro"   class="btn btn-warning btn-sm btn-block">内网漏洞扫描</a>
-                <p>自动发现联网设备，自动扫描与分析设备漏洞，专业详细的报告</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#intro"   class="btn btn-primary btn-sm btn-block">应用加固</a>
-                <p>加固安卓及IOS应用，防止未授权的逆向与破解</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#intro"   class="btn btn-success btn-sm btn-block">应急响应</a>
-                <p>专业安全工程师7x24小时为安全突发事件提供应急响应服务
-                </p>
-            </div>
-
-           </div><!-- /row -->
-          <hr>
-          <div class="row">
-          
-
-          <div class="col-md-8">
-            <h4 class="text-center">线上检测全部采用后付费方式</h4>
-<ol>  
-  <li>
-    线上提交检测
-    <ul>
-      
-      <li>
-        可提交任意格式的移动应用APP,包括安卓APK，IOS应用(只需提供应用名称),二进制库文件，路由器固件，手机固件,exe,iso,等等
-      </li>
-      <li>
-        可提交应用接口或网站以进行深度渗透测试。
-      </li>
-      <li>
-          可提交项目源码包以进行静态分析，动态分析，组成分析，漏洞分析等。
-        </li>
-        <li>
-            所有线上检测项目均免费出具结果摘要(含发现的漏洞总数，等级，潜在风险等摘要信息)。若检测结果符合双方预期，支付￥2999元检测费用可查看详细报告。若未发现安全问题则无需支付任何费用。
-          </li>
-    </ul>
-  </li>
-  <li>现场服务
-    <ul>
-      <li>
-        对较高保密级别的项目提供现场检测与项目验收服务
-      </li>
-      <li>验收检测完成后全部检测设备现场销毁，确保代码绝对安全</li>
-    </ul>
-  </li>
-
-</ol>
-         </div>
-          <div class="col-md-4 text-center">
-              <p>提交检测请用微信扫二维码:</p>
-              <img src="http://ww1.sinaimg.cn/large/87c01ec7gy1fps8pkzxoag2046046glh.gif"></img>
-
-        </div>
-          
-
-        </div>
-        <hr>
-
-
-        
-
-
-
-<div class="row">
-    <div class="col-md-12">
-    <section id="intro"></section>
-    <h4 class="text-center">检测项目详细介绍</h4>
-
-
-
-
-
-    <dl class="row no-gutters">
-        <dt class="col-sm-2">移动开发安全检测</dt>
-        <dd class="col-sm-10">
-         <p> 支持苹果IOS平台和安卓平台，提交分析时提供应用名称或者apk，ipa文件均可. 同时支持路由器固件，手机固件，exe,iso，等任意格式二进制文件的分析</p>
-        </dd>
-      
-        <dt class="col-sm-2">渗透测试</dt>
-        <dd class="col-sm-10">
-          <p>白帽子安全专家在获得用户许可的情况下，采用模拟黑客攻击的手段，检测网站与应用接口的安全性</p>
-          <div class="bd-example">
-              <details open="">
-                <summary>具体检测内容...</summary>
-                <ul>
-                    <li>弱口令检测: FTP、SSH、RDP、SMB、SMTP、POP3、IMAP MYSQL、MSSQL、MongoDB、MemCache、Redis、Oracle、Subversion、LDAP、PPTP、VPN、HTTP基础登录、WebFrom登录表单</li>
-                    <li>Web注入漏洞: SQL注入、命令注入、代码注入、SSRF网络注入、表达式注入、JAVA EL表达式注入命令执行、反序列化、XPATH注入等注入漏洞</li>
-                    <li>文件包含漏洞: 文件包含（LFI/RFI）、任意文件读取、任意文件上传、XXE、任意文件删除</li>
-                    <li>逻辑漏洞: JSONP数据劫持、身份认证安全、验证码限制被绕过、业务一致性安全、业务数据篡改、认证权限找回逻辑、业务授权(水平/垂直越权)安全、业务流程乱序、业务接口调用安全</li>
-                    <li>前端漏洞: XSS、CSRF、ClickJacking、Jsonp劫持、HTTP头注入CRLF、URL跳转</li>
-                    <li>错误配置: WebServer配置失误、中间件配置失误、容器配置失误</li>
-                    <li>信息泄露: 配置文件、测试文件、目录遍历、备份文件、SVN、GIT、压缩包、临时文件、接口暴露、心脏滴血</li>
-                </ul>
-              </details>
-            </div>
-        </dd> 
-
-        <dt class="col-sm-2">静态代码质量分析</dt>
-        <dd class="col-sm-10">
-         <p> 依据CWE,OWASP,CERT,MISRA和GJB等规范，对代码进行全面规则检查。准确定位空指针，内存泄漏，缓冲区溢出，死循环等300多种常见代码严重质量问题和安全隐患. 支持C,C++,objectiveC，JAVA，python，php，javascript，Ruby，SQL等20多种程序语言。超低误报率，极高检测效率，千万行级别大规模项目在24小时内出报告。</p>
-         <div class="bd-example">
-            <details open="" >
-              <summary>详细检测参数...</summary>
-              <ul>
-                  <li>支持国军标，OWASP，CERT，MISRA，CWE，等标准的规则检测。涵盖一千多种检测规则集，可自定义扩展。</li>
-                  <li>与主流构建系统集成：ANT, Anthill, Bamboo, BuildForge, Buildr, Ccache, Clearmake, CruiseControl, Distcc, Electric Cloud, Incredibuild, Jenkins, make, Maven, SCons, Visual BuildPro, VSBuild等。</li>
-                  <li>与第三方缺陷管理工具集成：FindBugs，sonarqube, Accuwork, Bugzilla, ClearQuest, CM Synergy, JIRA, Mantis, MKS Integrity, SourceForge Enterprise Edition (Collabnet), Remedy, Serena TeamTrack, Trac等。</li>
-                  <li>支持市场主流编译器，如ARM, Borland, GNU, Green Hills, IAR, Intel, Marvell, Microsoft, Nokia, QNX, Renesas, SNC, Sun, Texas Instruments, Visual Studio, Wind River，Java等。</li>
-                  <li>支持主流的目标机平台，包括：PPC, ARM,MIPS,x86, SPARC, XScale, SH, Codefire,SH,ST 20,8051,TI DSP C3000/C6000/C55x/C54x, Motorola 68HC05/68HC11, Freescale 68HC08/HCS08/68HC12/HCS12X, Renesas M16C/H8/M32C,C51/C166/C251等。</li>
-                  <li>支持主流的嵌入式/非嵌入式操作系统，包括：Windows，Linux，Solaris, AIX, FreeBSD, VxWorks, Embedded Linux, QNX, RTEMS, ucOS,WinCE, Windows Embedded,　PalmOS,Symbian, pSOS、Nucleus、ThreadX, INTEGRITY、OSE、UCLinux等。</li>
-                  <li>可进行多线程分析和增量分析。可自定义分析的深度等级，自定义缺陷等级和分类，自动合并相同的缺陷。</li>
-                  <li>直接看到缺陷和违规的源码上下文。提供详细的缺陷和违规解释，包括缺陷根源。缺陷发生的详细步骤， 以及包括如何修复。开发人员可通过浏览器跟踪所有函数调用。</li>
-                  <li>提供强大的关键指标报告，包括：函数、模块、新发现缺陷、当前存在缺陷、已修复的缺陷、全部缺陷、圈复杂度、单文件缺陷、已处理的缺陷、已忽略缺陷、已修复缺陷，代码行，缺陷密度等信息。</li>
-              </ul>
-            </details>
-          </div>
-        </dd>
-
-
-
-
-      <dt class="col-sm-2">嵌入式单元测试</dt>
-        <dd class="col-sm-10">
-         <p> 针对嵌入式系统代码进行全自动动态单元测试和集成测试，自动生成测试用例并统计代码覆盖度等详细参数信息。</p>
-        </dd>
-
-
-
-        <dt class="col-sm-2">软件成份分析</dt>
-        <dd class="col-sm-10">
-           <ul>
-            <li>基于海量代码指纹数据库(超过180亿行开源代码)，精确定位代码中的开源成分和私有成分，量化自主可控程度。 </li>
-          <li>
-            基于二进制成分指纹数据库，对任意格式的可执行代码进行精确剖析，定位组成成分信息
-          </li>
-           </ul>
-        </dd>
-
-        <dt class="col-sm-2">漏洞与合规性检测</dt>
-        <dd class="col-sm-10">
-            <ul>
-                <li>
-                    准确识别并定位中国国家信息安全漏洞共享平台CNVD和美国国家漏洞知识库NVD公布的危险代码和高危漏洞
-                </li>
-                <li>
-                    准确定位软件中的开源和私有组成部分，识别版本号和使用许可，检查合规性
-                </li>
-              </ul>
-        </dd>
-
-
-        <dt class="col-sm-2">通信安全与可靠性检测</dt>
-        <dd class="col-sm-10">
-            <ul>
-                <li>
-                    模糊测试: 不依赖任何已公开或未公开的漏洞知识库，对通信协议中的未知漏洞进行深度挖掘。支持协议包括以太网，广域网，工控，电力，物联网，汽车等行业的200多种常用协议和私有专用协议。
-                </li>
-                <li>
-                    <p>支持协议清单:H.248 NFS v4.0 / v4.1 SNMPv3 BACNET H.264 NHRP SOCKS BFD H.264 RTP NTP SSH1 BFD H.323 OAM (802.3ah) SSH2 BGP4+ HTTP OCSP STP BICC/M3UA IEC 60870-5-104 openFlow STUN Blueooth LE IEC 61850/Goose/ SV OSPFv2 SunRPC Bluetooth IEC 61850/MMS OSPFv3 SyncEthernet CAN Bus IEE1588 PTP PBB-TE Syslog CFM IKEv2 PBT (802.1ah) Telnet CIFS/SMB IMAP4 PCP TFTP CIP IPMI PIM-SM/DM TLS 1.2 CMP v2 IPSec PMIPv6 TLS/SSL 1.0/1.1, SSL3 COAP IPv4 POP3 Traffic Capture Fuzzer CWMP (TR-69) IPv6 PPPoE Trill DHCP/BootP IS-IS Profinet DCP (PLC) TURN DHCPv6 ISAKMP/IKEv1 Profinet PTCP (PLC) Universal ASN.1 BER Diameter ISASecure Solution RADIUS Universal Fuzzer DICOM iSCSI RIP UPnP DNP3 JSON format RIPng vCalendar format DNS Kerberos RSVP vCard format DTLS L2TPv2/v3 RTP/RTCP/SRTP VRRP DVMRPv1 LACP (802.3ad) RTSP WebApplication DVMRPv3 LDAPv3 S1AP WebSocket E-LMI LDP SCEP Wi-Fi AP EAPoL/802.1x LLDP (802.1AB) SCTP Wi-Fi AP WPA ESTP MAP SIP Wi-Fi Client Ethernet MIME SIP-I Wi-Fi Client WPA FCoE + FIP ModBus SMBv2 WMV FIX MP4 SMBv3 WPA Enterprise FTP MPLS SMPP SMS X.509v3 GARP 802.1D MQTT SMS PDU/File XML File GRE MSDP SMS SMPP XML SOAP GTPv0 MSRP SMTP XMPP GTPv1 NetBIOS SNMP Trap GTPv2-control NFS v2/v3 SNMPv2c</p>
-    
-                </li>
+        <div class="section" id="section3">
+            <span style="font-size:60px;text-shadow: 9px 9px 9px rgb(117, 117, 117);">监测与评测</span>
+           
+            <ul style="text-align:left;font-size: 2em">
+                <li >安全态势感知 结合多年安全研究成果和网络安全建设经验，以大数据技术架构为核心开发的集安全要素获取、分析、处理、跟踪、预测为一体的全流程安全解决方案。结合机器学习、云端情报联动等技术，实现对整体网络的安全态势感知。目前，方案已成熟应用于政府、交通、企业、教育等多行业用户，帮助用户真正实现“看得见的安全，信得过的网络”。</li>
+                <li >专利技术机密验收模式 代码不离被测单位， 进行代码验收时甲乙双方无任何数据交换。使用全程无需联网。可满足最高级别涉密项目验收的需要</li>
+                <li>静态代码分析 - 支持21种常用编程语言和50多种常用编译器. 分析精度和速度均大幅优于国际领先水平。可用于超大规模项目代码验收</li>
+                <li>代码组成分析 - 量化评估自主可控程度。精准定位代码中的外部来源部分。离线数据库包含超过180亿行代码指纹信息。</li>
+                <li>二进制文件分析 - 可分析任意格式二进制代码，基于全球漏洞信息库准确定位二进制文件中的漏洞</li>
+                <li>模糊测试 - 挖掘未知漏洞的利器，准确定位各种设备与软件中的未知漏洞</li>
+                <li>渗透测试 - 模拟黑客攻击手段对目标网络进行攻击以探测系统漏洞</li>
+                <li>单元测试 - 通过观察程序在运行过程中的状态，如寄存器内容，函数执行结果，内存使用情况等等，分析函数功能，明确代码逻辑，挖掘可能存在的漏洞</li>
+                <li>压力测试 - 通过模拟上千万用户实施并发负载及实时性能监测的方式来确认和查找问题。</li>
+                <li>物联网安全检测 - 支持最广泛的物联网IOT设备</li>
+                <li>工控安全监测 - 涵盖国内外上百款工控设备的漏洞信息和安全检测工具</li>
+                <li>汽车安全检测 -CANBUS CANFD ETHERNET等互联网汽车专用安全检测工具</li>
             </ul>
-        </dd>
+        </div>
+        <div class="section" id="section1">
+                <br><br><br>
+                <h1 style="font-size:90px;text-shadow: 9px 9px 9px rgb(117, 117, 117);">信息安全监管中心</h1>
+                <h1 style="font-size:90px;text-shadow: 9px 9px 9px rgb(117, 117, 117);">软硬件评测中心</h1>
+                <h1 style="font-size:90px;text-shadow: 9px 9px 9px rgb(117, 117, 117);">软硬件安全检测中心</h1>
+                <h1 style="font-size:90px;text-shadow: 9px 9px 9px rgb(117, 117, 117);">网络攻防对抗指挥中心</h1>
+           
+          
+        </div>
+        <div class="section" id="section2">
+                <h1  style="text-shadow: 9px 9px 9px rgb(0, 0, 0);">国家发明专利<br> 自主可控</h1>
+                <br><br><br>
+                <img width="300px" src="https://i.loli.net/2018/09/18/5ba0309dea3f5.jpg" id="qr"/>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullpage.js@3.0.2/dist/fullpage.min.js"></script>
 
 
-      </dl>
+    <script type="text/javascript">
+        var myFullpage = new fullpage('#fullpage', {
+            verticalCentered: false,
 
+            //to avoid problems with css3 transforms and fixed elements in Chrome, as detailed here: https://github.com/alvarotrigo/fullPage.js/issues/208
+            css3: false
+        });
+    </script>
+</body>
 
-  </div>
-</div>
-
-        <hr>
-
-      </div> <!-- /container -->
-
-    </main>
-
-    <footer class="container" >
-      <p>&copy; 中科软评科技(北京)有限公司  北京市西城区广莲路1号</p>
-     
-      <p>zk@zkruanping.com 2016-2018</p>
-    </footer>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"><\/script>')</script>
-    <script src="https://cdn.bootcss.com/popper.js/1.14.1/esm/popper.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="http://f.qschecker.com?act=pv8"></script>
-  </body>
 </html>

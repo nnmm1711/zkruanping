@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <title>CVESCAN.com</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.bootcss.com/datatables/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+
+
+
+
+
+    
+
+    <style>
+        .jumbotron {
+            background: url("http://ww1.sinaimg.cn/large/87c01ec7gy1fplacfacbcj21hc0tzgrk.jpg");
+
+        }
+
+        body {
+            padding-top: 3rem;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+        }
+
+        section {
+            padding-top: 4rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">CVESCAN.com</a>
+
+        <!--<img src="a.png" class="img-fluid" style="height: 25px;  display: block;"></img>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="http://www.cnnvd.org.cn/">中国国家信息安全漏洞库</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://nvd.nist.gov">美国国家漏洞数据库NVD</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://cve.mitre.org">全球漏洞数据库CVE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.nist.gov/itl">美国国家信息安全实验室ITL</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+
+
+
+    </nav>
+    <div class="jumbotron">
+        <div class="container">
+            <h2 style="color:white;" class="display-4 text-center">全球信息安全漏洞库</h2>
+            <h3 style="color:white;" class="text-center">文件检测服务中心</h3>
+            <ul style="color:white;">
+                <li>检测原理: 汇集中国国家信息安全漏洞库，美国国家信息安全漏洞库，赛门铁克漏洞库等行业著名漏洞库资源中超过90%的漏洞数据，安全技术团队通过监控编译过程，获取了漏洞在各个平台下的多维变尺度特征信息("Multidimensional
+                    Vector")，形成漏洞指纹特征大数据信息库. 借助于每日更新的全球安全漏洞特征库，高精度扫描引擎可以快速且准确的定位任意格式文件或代码中的安全漏洞，也可以进一步依据CVE编号获取漏洞修复方法</li>
+                <li>与其它杀毒引擎不同，本服务旨在发现软件成份中公认的安全缺陷，对开发人员和验收人员具有极高的实用价值，误报率接近于零</li>
+                <li>无需登录，无需注册，上传文件后十分钟内即可查看报告摘要(查看完整报告需付费)</li>
+                <li>支持任意文件格式, 包括bin格式的路由器固件, 物联网设备固件, 嵌入式软件, 安卓apk, 苹果ipa, DMG, exe, iso, x86, x64, linux, ARM 等等任意平台任意格式</li>
+                <li>适用于项目验收, 软件外包, 安全检测, 第三方测评等行业</li>
+            </ul>
+            <p class="text-center">
+                <a class="btn btn-info btn-lg" href="http://cve.xth.dynu.net/" role="button">上传分析 &raquo;</a>&nbsp;
+                <a class="btn btn-success btn-lg" href="#offline" role="button">离线服务 &raquo;</a>
+
+            </p>
+
+
+        </div>
+    </div>
+    <div class="container">
+
+  
+        <hr>
+        <div class="row">
+
+            <div class="col-md-6">
+                <p>
+                    <a class="btn btn-primary" href="#" name="offline">离线服务</a> 提供一次性检测设备在完全物理隔离的离线环境中使用，检测任务完成后设备与数据库自动销毁，确保无任何电子设备离开被测环境。 如需API接口服务请与技术支持微信联系。
+                </p>
+
+            </div>
+            <div class="col-md-6">
+                <div class="text-center">
+                    <p>
+                        <a>技术支持微信号</a>
+                    </p>
+                    <img src="https://i.loli.net/2018/08/20/5b7a209819257.jpg" alt="微信图片_20180820095938.jpg" title="微信图片_20180820095938.jpg" width="100px" />
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+
+
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="https://nvd.nist.gov">美国国家漏洞数据库</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.nist.gov/itl">美国国家信息安全实验室</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://cve.mitre.org">全球漏洞数据库CVE</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="http://www.ceprei.com/">赛宝实验室</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="http://www.cstc.org.cn/">中国软件评测中心</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </footer>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
